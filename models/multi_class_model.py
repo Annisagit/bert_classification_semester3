@@ -48,7 +48,7 @@ class MultiClassModel(pl.LightningModule):
         
         return output
     
-    def configure_optimizer(self):
+    def configure_optimizers(self):
         # adam ==> transfer weight, untuk nentuin weightnya tidak melenceng terlalu jauh(memberi sugestion), agar training lebih cepat, tidak memakan banyak memori, mengefisienkan random, kontrol loss
         optimizer = torch.optim.Adam(self.parameters(), lr = self.lr)
         return optimizer
