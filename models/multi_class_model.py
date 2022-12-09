@@ -26,7 +26,7 @@ class MultiClassModel(pl.LightningModule):
         
         self.lr = lr
         # menghitung loss function
-        self.criterion = nn.BCEWithLogitsLoss
+        self.criterion = nn.BCEWithLogitsLoss()
         
     # PROSES KALKULASI DAN INPUT
     def forward(self, input_ids, attention_mask, token_type_ids):
@@ -53,8 +53,8 @@ class MultiClassModel(pl.LightningModule):
         optimizer = torch.optim.Adam(self.parameters(), lr = self.lr)
         return optimizer
     
-    def training_step(self, batch, batch_idx):
-        x_input_ids, x_token_type_ids, x_attention_mask, y = batch
+    def training_step(self, train_batch, batch_idx):
+        x_input_ids, x_token_type_ids, x_attention_mask, y = train_batch
         
         out = self(input_ids=x_input_ids, attention_mask=x_attention_mask, token_type_ids = x_token_type_ids)
         
@@ -73,8 +73,8 @@ class MultiClassModel(pl.LightningModule):
         
         return loss
     
-    def Validation_step(self, batch, batch_idx):
-        x_input_ids, x_token_type_ids, x_attention_mask, y = batch
+    def Validation_step(self, valid_batch, batch_idx):
+        x_input_ids, x_token_type_ids, x_attention_mask, y = valid_batch
         
         out = self(input_ids=x_input_ids, attention_mask=x_attention_mask, token_type_ids = x_token_type_ids)
         
@@ -93,8 +93,8 @@ class MultiClassModel(pl.LightningModule):
         
         return loss
     
-    def predict_step(self, batch, batch_idx):
-        x_input_ids, x_token_type_ids, x_attention_mask, y = batch
+    def predict_step(self, pred_batch, batch_idx):
+        x_input_ids, x_token_type_ids, x_attention_mask, y = pred_batch
         
         out = self(input_ids=x_input_ids, attention_mask=x_attention_mask, token_type_ids = x_token_type_ids)
         
