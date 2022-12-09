@@ -62,10 +62,10 @@ class PreprocessorClass(pl.LightningDataModule):
         return self.stemmer.stem(string)
     
     def load_data(self,):
-        with open("data/training.res", 'rb') as tdr:
+        with open("bert_classification_semester3/data/training.res", 'rb') as tdr:
             train_pkl = pickle.load(tdr)
             train = pd.DataFrame({'title': train_pkl[0], 'label': train_pkl[1]})
-        with open("data/testing.res", "rb") as tsdr:
+        with open("bert_classification_semester3/data/testing.res", "rb") as tsdr:
             test_pkl = pickle.load(tsdr)
             test = pd.DataFrame({'title' : test_pkl[0], 'label': test_pkl[1]})
          
@@ -146,6 +146,7 @@ class PreprocessorClass(pl.LightningDataModule):
     
     def setup(self, stage = None):
         train_data, valid_data, test_data = self.preprocessor()
+        print(valid_data)
         if stage == "fit":
             self.train_data = train_data
             self.valid_data = valid_data
@@ -180,7 +181,7 @@ class PreprocessorClass(pl.LightningDataModule):
         )   
     
 if __name__ == '__main__':
-    Pre = PreprocessorClass(preprocessed_dir = "data/preprocessed")
-    Pre.setup(stage = "predict")
-    train_data = Pre.train_dataloader()
-    print(train_data)
+     Pre = PreprocessorClass(preprocessed_dir = "bert_classification_semester3/data/preprocessed")
+     Pre.setup(stage = "predict")
+     train_data = Pre.train_dataloader()
+     print(train_data)

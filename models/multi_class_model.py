@@ -88,7 +88,7 @@ class MultiClassModel(pl.LightningModule):
         
         report = classification_report(true, pred, output_dict= true, zero_division = 0)
         
-        self.log("accuracy", report["sccuracy"], prog_bar = true)
+        self.log("accuracy", report["accuracy"], prog_bar = true)
         self.log("loss", loss)
         
         return loss
