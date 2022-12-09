@@ -3,7 +3,7 @@ from models.multi_class_model import MultiClassModel
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import TensorBoardLogger
 if __name__ == '__main__':
-    dm = PreprocessorClass(preprocessed_dir = "bert_classification_semester3/data/preprocessed",
+    dm = PreprocessorClass(preprocessed_dir = "data/preprocessed",
                            batch_size = 10,
                            max_length = 100)
     model = MultiClassModel(
@@ -17,7 +17,7 @@ if __name__ == '__main__':
     trainer = pl.Trainer(
         gpus = 1, 
         max_epochs = 10,
-        default_root_dir = "bert_classification_semester3/checkpoints/class"
+        default_root_dir = "checkpoints/class"
         
     )
     
